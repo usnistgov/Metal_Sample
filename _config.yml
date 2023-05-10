@@ -1,0 +1,67 @@
+---
+baseurl: '/Metal_Sample'
+
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+exclude:
+  - "*.ipynb"
+  - "*.ipynb.raw.html"
+  - vendor
+  - template.ipynb.md
+  - "results/benchmark??.?.md"
+
+links:
+  live_url: https://pages.nist.gov/Metal_Sample
+  raw_name: Meta_Sample
+ ## contributors: https://github.com/usnistgov/pfhub/graphs/contributors
+ ## license: https://github.com/usnistgov/pfhub/blob/nist-pages/LICENSE.md
+  repo: usnistgov/Metal_Sample
+  github: https://github.com/usnistgov/Metal_Sample
+##  chat_room: usnistgov/chimad-phase-field
+##  chat: https://gitter.im/usnistgov/chimad-phase-field
+##  staticman_api: https://wd15-staticman.herokuapp.com/v3/entry/github/usnistgov/pfhub/master/simulations
+##  simmeta: https://github.com/usnistgov/pfhub/blob/master/_data/simulations
+##  maillist: chimad-phase-field@list.nist.gov
+##  maillist_subscribe: chimad-phase-field+subscribe@list.nist.gov
+##  maillist_unsubscribe: chimad-phase-field+unsubscribe@list.nist.gov
+##  maillist_archive: https://groups.google.com/a/list.nist.gov/forum/#!forum/chimad-phase-field
+  nist: https://www.nist.gov
+
+  wiki: https://github.com/usnistgov/Metal_Sample/wiki
+
+
+title: "NIST Metal Sample Repository"
+subtitle: "NIST Metal Sample Repository"
+
+plugins: [jekyll-coffeescript]
+
+## admin_email: 'chimad-phase-field-admin@list.nist.gov'
+ new_edit: 'http://prose.io/#usnistgov/Metal_Sample/tree/master'
+ prose_edit: 'http://prose.io/#usnistgov/Metal_Sample/edit/master'
+github_edit: 'https://github.com/usnistgov/Metal_Sample/edit/master'
+source_edit: 'https://github.com/usnistgov/Metal_Sample/blob/master'
+history_edit: 'https://github.com/usnistgov/Metal_Sample/commits/master'
+
+prose:
+  rooturl: 'wiki'
+  siteurl: 'https://pages.nist.gov/Metal_Sample'
+  media: 'images'
+  metadata:
+    wiki:
+      - name: "layout"
+        field:
+          element: "hidden"
+          value: "wiki"
+      - name: "title"
+        field:
+          value: "My Title"
+          element: "text"
+          label: "Page Title"
+          placeholder: "My Title"
+      - name: "published"
+        field:
+          element: "checkbox"
+          label: "published"
+          value: "true"
