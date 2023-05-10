@@ -13,7 +13,7 @@ exclude:
   - "results/benchmark??.?.md"
 
 links:
-  live_url: https://pages.nist.gov/Metal_Sample
+  live_url: https://usnistgov.github.io/Metal_Sample/
   raw_name: Meta_Sample
  ## contributors: https://github.com/usnistgov/pfhub/graphs/contributors
  ## license: https://github.com/usnistgov/pfhub/blob/nist-pages/LICENSE.md
@@ -46,7 +46,7 @@ history_edit: 'https://github.com/usnistgov/Metal_Sample/commits/master'
 
 prose:
   rooturl: 'wiki'
-  siteurl: 'https://pages.nist.gov/Metal_Sample'
+  siteurl: 'https://usnistgov.github.io/Metal_Sample/'
   media: 'images'
   metadata:
     wiki:
