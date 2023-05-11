@@ -1,0 +1,1366 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+      <xs:annotation>
+            <xs:appinfo><placeholder>e.g. Bldg 223 Rm B159</placeholder>
+            </xs:appinfo>
+      </xs:annotation>
+      <xs:element name="SampleNew" type="MaterialType"/>
+      <xs:complexType name="MaterialType">
+            <xs:sequence>
+                  <xs:element minOccurs="1" name="SampleID" type="thing" maxOccurs="unbounded"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="ParentSamples" type="thing"/>
+                  <xs:element maxOccurs="unbounded" name="SampleOwner" type="Person"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="FundingSource">
+                        <xs:complexType>
+                              <xs:sequence>
+                                    <xs:element name="OrganizationName" type="xs:string"/>
+                                    <xs:element name="IddNumber" type="xs:string"/>
+                              </xs:sequence>
+                        </xs:complexType>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="SampleLocation"
+                        type="xs:string"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="SamplePurpose"
+                        type="xs:string"/>
+                  <xs:element minOccurs="0" name="NominalComposition" type="CompositionType">
+                        <xs:annotation>
+                              <xs:appinfo/>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="MaterialCrystallinity" type="FormOfMaterial"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="Phase" type="PhaseType"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="MeasuredCompositionType">
+                        <xs:complexType>
+                              <xs:sequence>
+                                    <xs:element name="MeasuredComposition" type="CompositionType">
+                                          <xs:annotation>
+                                                <xs:appinfo/>
+                                          </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="CompositionMeasurementMethod" type="xs:string"/>
+                                    <xs:element maxOccurs="1" minOccurs="0" name="MeasurementDate"
+                                          type="xs:date"/>
+                              </xs:sequence>
+                        </xs:complexType>
+                  </xs:element>
+                  <xs:element name="Processing" type="AlloyProcessingType" minOccurs="1"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="SampleNotes">
+                        <xs:complexType>
+                              <xs:sequence>
+                                    <xs:element name="SampleNote" type="note-type"/>
+                                    <xs:element name="Downloadfiles" type="remote-file-type"/>
+                              </xs:sequence>
+                        </xs:complexType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="PrintingNotes" type="note-type">
+                        <xs:annotation>
+                              <xs:appinfo><label>Label Notes: Enter information to print on sample label under Title</label>
+                              </xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+            </xs:sequence>
+            <xs:attribute name="persistid" type="xs:string">
+                  <xs:annotation>
+                        <xs:appinfo><placeholder>automatically filled when record is stored</placeholder>
+                        </xs:appinfo>
+                  </xs:annotation>
+            </xs:attribute>
+      </xs:complexType>
+      <xs:complexType name="CrystalStructure">
+            <xs:sequence>
+                  <xs:element minOccurs="0" name="CrystalLattice">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Cubic"/>
+                                    <xs:enumeration value="Tetragonal"/>
+                                    <xs:enumeration value="Hexagonal"/>
+                                    <xs:enumeration value="Rhombohedral"/>
+                                    <xs:enumeration value="Orthorhombic"/>
+                                    <xs:enumeration value="Monoclinic"/>
+                                    <xs:enumeration value="Triclinic"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="SpaceGroup">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="C2/c"/>
+                                    <xs:enumeration value="C2/m"/>
+                                    <xs:enumeration value="Cmca"/>
+                                    <xs:enumeration value="Cmcm"/>
+                                    <xs:enumeration value="Cmmc"/>
+                                    <xs:enumeration value="F-43m"/>
+                                    <xs:enumeration value="Fd-3m"/>
+                                    <xs:enumeration value="Fdd2"/>
+                                    <xs:enumeration value="Fddd"/>
+                                    <xs:enumeration value="Fm-3c"/>
+                                    <xs:enumeration value="Fm-3m"/>
+                                    <xs:enumeration value="I-4"/>
+                                    <xs:enumeration value="I-42m"/>
+                                    <xs:enumeration value="I-43d"/>
+                                    <xs:enumeration value="I-43m"/>
+                                    <xs:enumeration value="I/mmm"/>
+                                    <xs:enumeration value="I213"/>
+                                    <xs:enumeration value="I4/m"/>
+                                    <xs:enumeration value="I4/man"/>
+                                    <xs:enumeration value="I4/mcm"/>
+                                    <xs:enumeration value="I4/mmm"/>
+                                    <xs:enumeration value="I41/amd"/>
+                                    <xs:enumeration value="Ia-3"/>
+                                    <xs:enumeration value="Ibam"/>
+                                    <xs:enumeration value="Im-3"/>
+                                    <xs:enumeration value="Im-3m"/>
+                                    <xs:enumeration value="Imam"/>
+                                    <xs:enumeration value="Imma"/>
+                                    <xs:enumeration value="Immm"/>
+                                    <xs:enumeration value="P-3"/>
+                                    <xs:enumeration value="P-3m1"/>
+                                    <xs:enumeration value="P-43m"/>
+                                    <xs:enumeration value="P-62m"/>
+                                    <xs:enumeration value="P-6m2"/>
+                                    <xs:enumeration value="P2/c"/>
+                                    <xs:enumeration value="P2/m"/>
+                                    <xs:enumeration value="P21/c"/>
+                                    <xs:enumeration value="P213"/>
+                                    <xs:enumeration value="P3121"/>
+                                    <xs:enumeration value="P4,32"/>
+                                    <xs:enumeration value="P4/mbm"/>
+                                    <xs:enumeration value="P4/mmm"/>
+                                    <xs:enumeration value="P4/mnc"/>
+                                    <xs:enumeration value="P4/nbm"/>
+                                    <xs:enumeration value="P4/nmm"/>
+                                    <xs:enumeration value="P42/m"/>
+                                    <xs:enumeration value="P42/mmc"/>
+                                    <xs:enumeration value="P42/mnm"/>
+                                    <xs:enumeration value="P42/nmc"/>
+                                    <xs:enumeration value="P42/nnm"/>
+                                    <xs:enumeration value="P421m"/>
+                                    <xs:enumeration value="P6,/mmc"/>
+                                    <xs:enumeration value="P6,mc"/>
+                                    <xs:enumeration value="P6-3mc"/>
+                                    <xs:enumeration value="P6/mmm"/>
+                                    <xs:enumeration value="P6222"/>
+                                    <xs:enumeration value="P63/m"/>
+                                    <xs:enumeration value="P63/mcm"/>
+                                    <xs:enumeration value="P63/mmc"/>
+                                    <xs:enumeration value="P63/mmm"/>
+                                    <xs:enumeration value="P63cm"/>
+                                    <xs:enumeration value="Pa3"/>
+                                    <xs:enumeration value="Pam1"/>
+                                    <xs:enumeration value="Pbca"/>
+                                    <xs:enumeration value="Pbcm"/>
+                                    <xs:enumeration value="Pbnm"/>
+                                    <xs:enumeration value="Pccn"/>
+                                    <xs:enumeration value="Pm-3"/>
+                                    <xs:enumeration value="Pm-3m"/>
+                                    <xs:enumeration value="Pm3n"/>
+                                    <xs:enumeration value="Pma2"/>
+                                    <xs:enumeration value="Pmcn"/>
+                                    <xs:enumeration value="Pmma"/>
+                                    <xs:enumeration value="Pmmn"/>
+                                    <xs:enumeration value="Pmnb"/>
+                                    <xs:enumeration value="Pn-3m"/>
+                                    <xs:enumeration value="Pnma"/>
+                                    <xs:enumeration value="Pnnm"/>
+                                    <xs:enumeration value="R-3"/>
+                                    <xs:enumeration value="R-3c"/>
+                                    <xs:enumeration value="R-3m"/>
+                                    <xs:enumeration value="R32"/>
+                                    <xs:enumeration value="l42d"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="wyckoffSequence"
+                        type="xs:string"/>
+                  <xs:element minOccurs="0" name="prototype">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="A14C3"/>
+                                    <xs:enumeration value="AI3Ni"/>
+                                    <xs:enumeration value="AI3Zr"/>
+                                    <xs:enumeration value="AI4Ba"/>
+                                    <xs:enumeration value="AI4U"/>
+                                    <xs:enumeration value="AI6Mn"/>
+                                    <xs:enumeration value="AICu2Mn (Heusler)"/>
+                                    <xs:enumeration value="AIFe3C (perovskite)"/>
+                                    <xs:enumeration value="Ag2O"/>
+                                    <xs:enumeration value="AgAuTe4 (sylvanite)"/>
+                                    <xs:enumeration value="Al2CdS4"/>
+                                    <xs:enumeration value="Al2Cu"/>
+                                    <xs:enumeration value="Al2MgO4 (spinel)"/>
+                                    <xs:enumeration value="Al3Mg2"/>
+                                    <xs:enumeration value="Al3Ti"/>
+                                    <xs:enumeration value="Al4C4Si"/>
+                                    <xs:enumeration value="Al7Cu2Fe"/>
+                                    <xs:enumeration value="Al8FeMg3Si6"/>
+                                    <xs:enumeration value="AlB2"/>
+                                    <xs:enumeration value="AlLi3N2"/>
+                                    <xs:enumeration value="As2S3"/>
+                                    <xs:enumeration value="AsMn3"/>
+                                    <xs:enumeration value="AsS (realgar)"/>
+                                    <xs:enumeration value="AuBe5"/>
+                                    <xs:enumeration value="AuCd"/>
+                                    <xs:enumeration value="AuCu"/>
+                                    <xs:enumeration value="AuCu3"/>
+                                    <xs:enumeration value="AuCull"/>
+                                    <xs:enumeration value="AuTe2 (calaverite)"/>
+                                    <xs:enumeration value="AuTe2 (krennerite)"/>
+                                    <xs:enumeration value="B4C"/>
+                                    <xs:enumeration value="B4Th"/>
+                                    <xs:enumeration value="BN"/>
+                                    <xs:enumeration value="BaHg11"/>
+                                    <xs:enumeration value="BaS3"/>
+                                    <xs:enumeration value="Bi2Te3"/>
+                                    <xs:enumeration value="BiF3, AIFe3"/>
+                                    <xs:enumeration value="C (graphite)"/>
+                                    <xs:enumeration value="C(diamond)"/>
+                                    <xs:enumeration value="CaB6"/>
+                                    <xs:enumeration value="CaC2"/>
+                                    <xs:enumeration value="CaCl2"/>
+                                    <xs:enumeration value="CaCu5"/>
+                                    <xs:enumeration value="CaF2 (fluorite)"/>
+                                    <xs:enumeration value="CaSi"/>
+                                    <xs:enumeration value="CaSi2"/>
+                                    <xs:enumeration value="CaTiO3 (perovskite)"/>
+                                    <xs:enumeration value="CdI2"/>
+                                    <xs:enumeration value="CdSb"/>
+                                    <xs:enumeration value="Ce2Mg12"/>
+                                    <xs:enumeration value="Ce5Mg41"/>
+                                    <xs:enumeration value="Co2Al5"/>
+                                    <xs:enumeration value="Co2Al9"/>
+                                    <xs:enumeration value="Co2Si"/>
+                                    <xs:enumeration value="Co2Si, NiSiTi (E-phase)"/>
+                                    <xs:enumeration value="Co3S4"/>
+                                    <xs:enumeration value="Co5Cr2Mo3"/>
+                                    <xs:enumeration value="Co9S8"/>
+                                    <xs:enumeration value="CoAs3 (skutterudite)"/>
+                                    <xs:enumeration value="CoSn"/>
+                                    <xs:enumeration value="CoU"/>
+                                    <xs:enumeration value="Cr23C6"/>
+                                    <xs:enumeration value="Cr3C2"/>
+                                    <xs:enumeration value="Cr3Si (beta-W)"/>
+                                    <xs:enumeration value="Cr5Al8"/>
+                                    <xs:enumeration value="Cr5B3"/>
+                                    <xs:enumeration value="Cr7C3"/>
+                                    <xs:enumeration value="CrB"/>
+                                    <xs:enumeration value="CrSi2"/>
+                                    <xs:enumeration value="CsCI"/>
+                                    <xs:enumeration value="Cu"/>
+                                    <xs:enumeration value="Cu15Si4"/>
+                                    <xs:enumeration value="Cu2FeSnS4"/>
+                                    <xs:enumeration value="Cu2Mg (Laves)"/>
+                                    <xs:enumeration value="Cu2Sb"/>
+                                    <xs:enumeration value="Cu2Te"/>
+                                    <xs:enumeration value="Cu3P"/>
+                                    <xs:enumeration value="Cu3VS4 (sulvanite)"/>
+                                    <xs:enumeration value="Cu5Zn8 (gamma-brass)"/>
+                                    <xs:enumeration value="Cu9Al4 (gamma-brass)"/>
+                                    <xs:enumeration value="CuFe2S3 (cubanite)"/>
+                                    <xs:enumeration value="CuFeS2 (chalcopyrite)"/>
+                                    <xs:enumeration value="CuMg2"/>
+                                    <xs:enumeration value="CuO (tenorite)"/>
+                                    <xs:enumeration value="CuPt"/>
+                                    <xs:enumeration value="CuPt3"/>
+                                    <xs:enumeration value="CuS (rovelite)"/>
+                                    <xs:enumeration value="CuS2Sb (wolfsbergite)"/>
+                                    <xs:enumeration value="CuTi3"/>
+                                    <xs:enumeration value="Fe2N"/>
+                                    <xs:enumeration value="Fe2P"/>
+                                    <xs:enumeration value="Fe3C (cementite)"/>
+                                    <xs:enumeration value="Fe3Th7"/>
+                                    <xs:enumeration value="Fe3W3C (eta-carbide)"/>
+                                    <xs:enumeration value="Fe3Zn10 (gamma-brass)"/>
+                                    <xs:enumeration value="Fe4N"/>
+                                    <xs:enumeration value="Fe7W6 (mu-phase)"/>
+                                    <xs:enumeration value="Fe8N"/>
+                                    <xs:enumeration value="FeAsS"/>
+                                    <xs:enumeration value="FeB"/>
+                                    <xs:enumeration value="FeKS2"/>
+                                    <xs:enumeration value="FeS2 (marcasite)"/>
+                                    <xs:enumeration value="FeS2 (pyrite)"/>
+                                    <xs:enumeration value="FeSi"/>
+                                    <xs:enumeration value="Ga2Mg5"/>
+                                    <xs:enumeration value="Ge7Ir3"/>
+                                    <xs:enumeration value="GeS"/>
+                                    <xs:enumeration value="GeS2"/>
+                                    <xs:enumeration value="HgCl2"/>
+                                    <xs:enumeration value="HgS (cinnabar)"/>
+                                    <xs:enumeration value="HgSn6-10"/>
+                                    <xs:enumeration value="I2"/>
+                                    <xs:enumeration value="In"/>
+                                    <xs:enumeration value="InTh"/>
+                                    <xs:enumeration value="Ir3Si"/>
+                                    <xs:enumeration value="La2O3"/>
+                                    <xs:enumeration value="LiZn2"/>
+                                    <xs:enumeration value="Mg"/>
+                                    <xs:enumeration value="Mg2Ni"/>
+                                    <xs:enumeration value="Mg2Z11"/>
+                                    <xs:enumeration value="Mg32(Al,Zn)49"/>
+                                    <xs:enumeration value="MgAgAs"/>
+                                    <xs:enumeration value="MgCuAl2"/>
+                                    <xs:enumeration value="MgNi2 (Laves)"/>
+                                    <xs:enumeration value="MgZn2 (Laves)"/>
+                                    <xs:enumeration value="Mn12Th"/>
+                                    <xs:enumeration value="Mn23Th6, Cu16Mg6Si7 (G-phase)"/>
+                                    <xs:enumeration value="Mn2O3"/>
+                                    <xs:enumeration value="Mn3Al9Si"/>
+                                    <xs:enumeration value="Mn4B"/>
+                                    <xs:enumeration value="Mn5Si3"/>
+                                    <xs:enumeration value="MnP"/>
+                                    <xs:enumeration value="MnU6"/>
+                                    <xs:enumeration value="Mo2B5"/>
+                                    <xs:enumeration value="MoB"/>
+                                    <xs:enumeration value="MoNi4"/>
+                                    <xs:enumeration value="MoS2"/>
+                                    <xs:enumeration value="MoSi2"/>
+                                    <xs:enumeration value="Na3As"/>
+                                    <xs:enumeration value="NaCI (rocksalt)"/>
+                                    <xs:enumeration value="NaCrS2"/>
+                                    <xs:enumeration value="NaTl"/>
+                                    <xs:enumeration value="NaZn13"/>
+                                    <xs:enumeration value="Ni17Th2"/>
+                                    <xs:enumeration value="Ni2Al3"/>
+                                    <xs:enumeration value="Ni2In"/>
+                                    <xs:enumeration value="Ni3P"/>
+                                    <xs:enumeration value="Ni3S2"/>
+                                    <xs:enumeration value="Ni3Sn"/>
+                                    <xs:enumeration value="Ni3Ti"/>
+                                    <xs:enumeration value="NiAs"/>
+                                    <xs:enumeration value="NiS (millerite)"/>
+                                    <xs:enumeration value="NiSbS (ullmanite)"/>
+                                    <xs:enumeration value="P (black)"/>
+                                    <xs:enumeration value="Pb4Pt"/>
+                                    <xs:enumeration value="PbFCl"/>
+                                    <xs:enumeration value="PbO"/>
+                                    <xs:enumeration value="PdS"/>
+                                    <xs:enumeration value="PdSn2"/>
+                                    <xs:enumeration value="PdSn4"/>
+                                    <xs:enumeration value="Pt2Sn3"/>
+                                    <xs:enumeration value="PtS (cooperite)"/>
+                                    <xs:enumeration value="Pu2C3"/>
+                                    <xs:enumeration value="ReO3"/>
+                                    <xs:enumeration value="Sb2O3 (senarmontite)"/>
+                                    <xs:enumeration value="Sb2O3 (valentinite)"/>
+                                    <xs:enumeration value="Sb2S3"/>
+                                    <xs:enumeration value="Sb2Tl7"/>
+                                    <xs:enumeration value="Si2U3"/>
+                                    <xs:enumeration value="SiO2 (beta cristobalite)"/>
+                                    <xs:enumeration value="SiO2 (beta tridymite)"/>
+                                    <xs:enumeration value="SiO2 (high quartz)"/>
+                                    <xs:enumeration value="SiS2"/>
+                                    <xs:enumeration value="SiU3"/>
+                                    <xs:enumeration value="SnS"/>
+                                    <xs:enumeration value="Ta3B4"/>
+                                    <xs:enumeration value="Th3P4"/>
+                                    <xs:enumeration value="Th7S12"/>
+                                    <xs:enumeration value="ThC2"/>
+                                    <xs:enumeration value="ThH2"/>
+                                    <xs:enumeration value="ThSi2"/>
+                                    <xs:enumeration value="TiAs"/>
+                                    <xs:enumeration value="TiB"/>
+                                    <xs:enumeration value="TiO2 (brookite)"/>
+                                    <xs:enumeration value="TiO2 (rutile)"/>
+                                    <xs:enumeration value="TiSi2"/>
+                                    <xs:enumeration value="TlSe"/>
+                                    <xs:enumeration value="UB12"/>
+                                    <xs:enumeration value="W"/>
+                                    <xs:enumeration value="W2B5"/>
+                                    <xs:enumeration value="W3Si3"/>
+                                    <xs:enumeration value="WC"/>
+                                    <xs:enumeration value="Zn3P2"/>
+                                    <xs:enumeration value="ZnS (sphalerite)"/>
+                                    <xs:enumeration value="ZnS (wurtzite)"/>
+                                    <xs:enumeration value="ZrO2"/>
+                                    <xs:enumeration value="ZrSi2"/>
+                                    <xs:enumeration value="alpha-Al2O3 (corundum)"/>
+                                    <xs:enumeration value="alpha-As"/>
+                                    <xs:enumeration value="alpha-Ga"/>
+                                    <xs:enumeration value="alpha-Hg"/>
+                                    <xs:enumeration value="alpha-La"/>
+                                    <xs:enumeration value="alpha-Mn (chi-phase)"/>
+                                    <xs:enumeration value="alpha-Np"/>
+                                    <xs:enumeration value="alpha-Pa"/>
+                                    <xs:enumeration value="alpha-Po"/>
+                                    <xs:enumeration value="alpha-S"/>
+                                    <xs:enumeration value="alpha-Se"/>
+                                    <xs:enumeration value="alpha-Sm"/>
+                                    <xs:enumeration value="alpha-U"/>
+                                    <xs:enumeration value="beta-Cu3Ti"/>
+                                    <xs:enumeration value="beta-Mn"/>
+                                    <xs:enumeration value="beta-Np"/>
+                                    <xs:enumeration value="beta-Po"/>
+                                    <xs:enumeration value="beta-Se"/>
+                                    <xs:enumeration value="beta-Sn"/>
+                                    <xs:enumeration value="beta-U"/>
+                                    <xs:enumeration value="delta-CuTi"/>
+                                    <xs:enumeration value="delta-Ni3Sn4"/>
+                                    <xs:enumeration value="eta-NiSi"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="pearsonSymbol">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="cF112"/>
+                                    <xs:enumeration value="cF116"/>
+                                    <xs:enumeration value="cF12"/>
+                                    <xs:enumeration value="cF16"/>
+                                    <xs:enumeration value="cF1832"/>
+                                    <xs:enumeration value="cF24"/>
+                                    <xs:enumeration value="cF32"/>
+                                    <xs:enumeration value="cF4"/>
+                                    <xs:enumeration value="cF52"/>
+                                    <xs:enumeration value="cF56"/>
+                                    <xs:enumeration value="cF68"/>
+                                    <xs:enumeration value="cF8"/>
+                                    <xs:enumeration value="cF80"/>
+                                    <xs:enumeration value="cI16"/>
+                                    <xs:enumeration value="cI162"/>
+                                    <xs:enumeration value="cI2"/>
+                                    <xs:enumeration value="cI28"/>
+                                    <xs:enumeration value="cI32"/>
+                                    <xs:enumeration value="cI40"/>
+                                    <xs:enumeration value="cI52"/>
+                                    <xs:enumeration value="cI54"/>
+                                    <xs:enumeration value="cI58"/>
+                                    <xs:enumeration value="cI76"/>
+                                    <xs:enumeration value="cI80"/>
+                                    <xs:enumeration value="cI96"/>
+                                    <xs:enumeration value="cP1"/>
+                                    <xs:enumeration value="cP12"/>
+                                    <xs:enumeration value="cP2"/>
+                                    <xs:enumeration value="cP20"/>
+                                    <xs:enumeration value="cP36"/>
+                                    <xs:enumeration value="cP39"/>
+                                    <xs:enumeration value="cP4"/>
+                                    <xs:enumeration value="cP5"/>
+                                    <xs:enumeration value="cP52"/>
+                                    <xs:enumeration value="cP6"/>
+                                    <xs:enumeration value="cP7"/>
+                                    <xs:enumeration value="cP8"/>
+                                    <xs:enumeration value="hP1"/>
+                                    <xs:enumeration value="hP10"/>
+                                    <xs:enumeration value="hP12"/>
+                                    <xs:enumeration value="hP14"/>
+                                    <xs:enumeration value="hP16"/>
+                                    <xs:enumeration value="hP18"/>
+                                    <xs:enumeration value="hP2"/>
+                                    <xs:enumeration value="hP20"/>
+                                    <xs:enumeration value="hP24"/>
+                                    <xs:enumeration value="hP26"/>
+                                    <xs:enumeration value="hP28"/>
+                                    <xs:enumeration value="hP3"/>
+                                    <xs:enumeration value="hP38"/>
+                                    <xs:enumeration value="hP4"/>
+                                    <xs:enumeration value="hP5"/>
+                                    <xs:enumeration value="hP6"/>
+                                    <xs:enumeration value="hP8"/>
+                                    <xs:enumeration value="hP9"/>
+                                    <xs:enumeration value="hR1"/>
+                                    <xs:enumeration value="hR10"/>
+                                    <xs:enumeration value="hR13"/>
+                                    <xs:enumeration value="hR15"/>
+                                    <xs:enumeration value="hR22"/>
+                                    <xs:enumeration value="hR26"/>
+                                    <xs:enumeration value="hR3"/>
+                                    <xs:enumeration value="hR32"/>
+                                    <xs:enumeration value="hR4"/>
+                                    <xs:enumeration value="hR5"/>
+                                    <xs:enumeration value="hR53"/>
+                                    <xs:enumeration value="hR6"/>
+                                    <xs:enumeration value="hR7"/>
+                                    <xs:enumeration value="mC12"/>
+                                    <xs:enumeration value="mC14"/>
+                                    <xs:enumeration value="mC16"/>
+                                    <xs:enumeration value="mC6"/>
+                                    <xs:enumeration value="mC8"/>
+                                    <xs:enumeration value="mP12"/>
+                                    <xs:enumeration value="mP20"/>
+                                    <xs:enumeration value="mP22"/>
+                                    <xs:enumeration value="mP24"/>
+                                    <xs:enumeration value="mP32"/>
+                                    <xs:enumeration value="mP64"/>
+                                    <xs:enumeration value="oC12"/>
+                                    <xs:enumeration value="oC20"/>
+                                    <xs:enumeration value="oC24"/>
+                                    <xs:enumeration value="oC28"/>
+                                    <xs:enumeration value="oC4"/>
+                                    <xs:enumeration value="oC8"/>
+                                    <xs:enumeration value="oCl6"/>
+                                    <xs:enumeration value="oF128"/>
+                                    <xs:enumeration value="oF24"/>
+                                    <xs:enumeration value="oF40"/>
+                                    <xs:enumeration value="oF48"/>
+                                    <xs:enumeration value="oF72"/>
+                                    <xs:enumeration value="oI12"/>
+                                    <xs:enumeration value="oI14"/>
+                                    <xs:enumeration value="oI20"/>
+                                    <xs:enumeration value="oI28"/>
+                                    <xs:enumeration value="oI338"/>
+                                    <xs:enumeration value="oI40"/>
+                                    <xs:enumeration value="oP12"/>
+                                    <xs:enumeration value="oP16"/>
+                                    <xs:enumeration value="oP20"/>
+                                    <xs:enumeration value="oP24"/>
+                                    <xs:enumeration value="oP4"/>
+                                    <xs:enumeration value="oP40"/>
+                                    <xs:enumeration value="oP6"/>
+                                    <xs:enumeration value="oP8"/>
+                                    <xs:enumeration value="t16"/>
+                                    <xs:enumeration value="tI10"/>
+                                    <xs:enumeration value="tI12"/>
+                                    <xs:enumeration value="tI14"/>
+                                    <xs:enumeration value="tI16"/>
+                                    <xs:enumeration value="tI18"/>
+                                    <xs:enumeration value="tI2"/>
+                                    <xs:enumeration value="tI26"/>
+                                    <xs:enumeration value="tI28"/>
+                                    <xs:enumeration value="tI32"/>
+                                    <xs:enumeration value="tI4"/>
+                                    <xs:enumeration value="tI6"/>
+                                    <xs:enumeration value="tI8"/>
+                                    <xs:enumeration value="tI92"/>
+                                    <xs:enumeration value="tP10"/>
+                                    <xs:enumeration value="tP16"/>
+                                    <xs:enumeration value="tP2"/>
+                                    <xs:enumeration value="tP20"/>
+                                    <xs:enumeration value="tP30"/>
+                                    <xs:enumeration value="tP4"/>
+                                    <xs:enumeration value="tP40"/>
+                                    <xs:enumeration value="tP50"/>
+                                    <xs:enumeration value="tP6"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="strukturbericht">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value=""/>
+                                    <xs:enumeration value="A1"/>
+                                    <xs:enumeration value="A10"/>
+                                    <xs:enumeration value="A11"/>
+                                    <xs:enumeration value="A12"/>
+                                    <xs:enumeration value="A13"/>
+                                    <xs:enumeration value="A14"/>
+                                    <xs:enumeration value="A15"/>
+                                    <xs:enumeration value="A16"/>
+                                    <xs:enumeration value="A17"/>
+                                    <xs:enumeration value="A2"/>
+                                    <xs:enumeration value="A20"/>
+                                    <xs:enumeration value="A3"/>
+                                    <xs:enumeration value="A3 prime"/>
+                                    <xs:enumeration value="A4"/>
+                                    <xs:enumeration value="A5"/>
+                                    <xs:enumeration value="A6"/>
+                                    <xs:enumeration value="A7"/>
+                                    <xs:enumeration value="A8"/>
+                                    <xs:enumeration value="A9"/>
+                                    <xs:enumeration value="Aa"/>
+                                    <xs:enumeration value="Ab"/>
+                                    <xs:enumeration value="Ac"/>
+                                    <xs:enumeration value="Ad"/>
+                                    <xs:enumeration value="Af"/>
+                                    <xs:enumeration value="Ag"/>
+                                    <xs:enumeration value="Ah"/>
+                                    <xs:enumeration value="Ai"/>
+                                    <xs:enumeration value="Ak"/>
+                                    <xs:enumeration value="Al"/>
+                                    <xs:enumeration value="B1"/>
+                                    <xs:enumeration value="B10"/>
+                                    <xs:enumeration value="B11"/>
+                                    <xs:enumeration value="B13"/>
+                                    <xs:enumeration value="B16"/>
+                                    <xs:enumeration value="B17"/>
+                                    <xs:enumeration value="B18"/>
+                                    <xs:enumeration value="B19"/>
+                                    <xs:enumeration value="B2"/>
+                                    <xs:enumeration value="B20"/>
+                                    <xs:enumeration value="B26"/>
+                                    <xs:enumeration value="B27"/>
+                                    <xs:enumeration value="B29"/>
+                                    <xs:enumeration value="B3"/>
+                                    <xs:enumeration value="B31"/>
+                                    <xs:enumeration value="B32"/>
+                                    <xs:enumeration value="B33 (=Bf)"/>
+                                    <xs:enumeration value="B34"/>
+                                    <xs:enumeration value="B35"/>
+                                    <xs:enumeration value="B37"/>
+                                    <xs:enumeration value="B4"/>
+                                    <xs:enumeration value="B81"/>
+                                    <xs:enumeration value="B82"/>
+                                    <xs:enumeration value="B9"/>
+                                    <xs:enumeration value="Ba"/>
+                                    <xs:enumeration value="Bb"/>
+                                    <xs:enumeration value="Bc"/>
+                                    <xs:enumeration value="Bd"/>
+                                    <xs:enumeration value="Be"/>
+                                    <xs:enumeration value="Bf (=B33)"/>
+                                    <xs:enumeration value="Bg"/>
+                                    <xs:enumeration value="Bh"/>
+                                    <xs:enumeration value="Bj"/>
+                                    <xs:enumeration value="Bk"/>
+                                    <xs:enumeration value="Bl"/>
+                                    <xs:enumeration value="Bm"/>
+                                    <xs:enumeration value="C1"/>
+                                    <xs:enumeration value="C10"/>
+                                    <xs:enumeration value="C11a"/>
+                                    <xs:enumeration value="C11b"/>
+                                    <xs:enumeration value="C12"/>
+                                    <xs:enumeration value="C14"/>
+                                    <xs:enumeration value="C15"/>
+                                    <xs:enumeration value="C15b"/>
+                                    <xs:enumeration value="C16"/>
+                                    <xs:enumeration value="C18"/>
+                                    <xs:enumeration value="C19"/>
+                                    <xs:enumeration value="C1b"/>
+                                    <xs:enumeration value="C2"/>
+                                    <xs:enumeration value="C21"/>
+                                    <xs:enumeration value="C22"/>
+                                    <xs:enumeration value="C23"/>
+                                    <xs:enumeration value="C28"/>
+                                    <xs:enumeration value="C3"/>
+                                    <xs:enumeration value="C32"/>
+                                    <xs:enumeration value="C33"/>
+                                    <xs:enumeration value="C34"/>
+                                    <xs:enumeration value="C35"/>
+                                    <xs:enumeration value="C36"/>
+                                    <xs:enumeration value="C37"/>
+                                    <xs:enumeration value="C38"/>
+                                    <xs:enumeration value="C4"/>
+                                    <xs:enumeration value="C40"/>
+                                    <xs:enumeration value="C42"/>
+                                    <xs:enumeration value="C43"/>
+                                    <xs:enumeration value="C44"/>
+                                    <xs:enumeration value="C46"/>
+                                    <xs:enumeration value="C49"/>
+                                    <xs:enumeration value="C54"/>
+                                    <xs:enumeration value="C6"/>
+                                    <xs:enumeration value="C7"/>
+                                    <xs:enumeration value="C8"/>
+                                    <xs:enumeration value="C9"/>
+                                    <xs:enumeration value="Ca"/>
+                                    <xs:enumeration value="Cb"/>
+                                    <xs:enumeration value="Cc"/>
+                                    <xs:enumeration value="Ce"/>
+                                    <xs:enumeration value="Cg"/>
+                                    <xs:enumeration value="Ch"/>
+                                    <xs:enumeration value="Ck"/>
+                                    <xs:enumeration value="D011"/>
+                                    <xs:enumeration value="D017"/>
+                                    <xs:enumeration value="D018"/>
+                                    <xs:enumeration value="D019"/>
+                                    <xs:enumeration value="D02"/>
+                                    <xs:enumeration value="D020"/>
+                                    <xs:enumeration value="D021"/>
+                                    <xs:enumeration value="D022"/>
+                                    <xs:enumeration value="D023"/>
+                                    <xs:enumeration value="D024"/>
+                                    <xs:enumeration value="D03"/>
+                                    <xs:enumeration value="D09"/>
+                                    <xs:enumeration value="D0a"/>
+                                    <xs:enumeration value="D0c"/>
+                                    <xs:enumeration value="D0c prime"/>
+                                    <xs:enumeration value="D0d"/>
+                                    <xs:enumeration value="D0e"/>
+                                    <xs:enumeration value="D101"/>
+                                    <xs:enumeration value="D102"/>
+                                    <xs:enumeration value="D13"/>
+                                    <xs:enumeration value="D1a"/>
+                                    <xs:enumeration value="D1b"/>
+                                    <xs:enumeration value="D1c"/>
+                                    <xs:enumeration value="D1d"/>
+                                    <xs:enumeration value="D1e"/>
+                                    <xs:enumeration value="D1f"/>
+                                    <xs:enumeration value="D1g"/>
+                                    <xs:enumeration value="D21"/>
+                                    <xs:enumeration value="D23"/>
+                                    <xs:enumeration value="D2b"/>
+                                    <xs:enumeration value="D2c"/>
+                                    <xs:enumeration value="D2d"/>
+                                    <xs:enumeration value="D2e"/>
+                                    <xs:enumeration value="D2f"/>
+                                    <xs:enumeration value="D2g"/>
+                                    <xs:enumeration value="D2h"/>
+                                    <xs:enumeration value="D51"/>
+                                    <xs:enumeration value="D510"/>
+                                    <xs:enumeration value="D511"/>
+                                    <xs:enumeration value="D513"/>
+                                    <xs:enumeration value="D52"/>
+                                    <xs:enumeration value="D53"/>
+                                    <xs:enumeration value="D54"/>
+                                    <xs:enumeration value="D58"/>
+                                    <xs:enumeration value="D59"/>
+                                    <xs:enumeration value="D5a"/>
+                                    <xs:enumeration value="D5b"/>
+                                    <xs:enumeration value="D5c"/>
+                                    <xs:enumeration value="D5e"/>
+                                    <xs:enumeration value="D5f"/>
+                                    <xs:enumeration value="D71"/>
+                                    <xs:enumeration value="D72"/>
+                                    <xs:enumeration value="D73"/>
+                                    <xs:enumeration value="D7a"/>
+                                    <xs:enumeration value="D7b"/>
+                                    <xs:enumeration value="D81"/>
+                                    <xs:enumeration value="D810"/>
+                                    <xs:enumeration value="D811"/>
+                                    <xs:enumeration value="D82"/>
+                                    <xs:enumeration value="D83"/>
+                                    <xs:enumeration value="D84"/>
+                                    <xs:enumeration value="D85"/>
+                                    <xs:enumeration value="D86"/>
+                                    <xs:enumeration value="D88"/>
+                                    <xs:enumeration value="D89"/>
+                                    <xs:enumeration value="D8a"/>
+                                    <xs:enumeration value="D8b"/>
+                                    <xs:enumeration value="D8c"/>
+                                    <xs:enumeration value="D8d"/>
+                                    <xs:enumeration value="D8e"/>
+                                    <xs:enumeration value="D8f"/>
+                                    <xs:enumeration value="D8g"/>
+                                    <xs:enumeration value="D8h"/>
+                                    <xs:enumeration value="D8i"/>
+                                    <xs:enumeration value="D8k"/>
+                                    <xs:enumeration value="D8l"/>
+                                    <xs:enumeration value="D8m"/>
+                                    <xs:enumeration value="E01"/>
+                                    <xs:enumeration value="E07"/>
+                                    <xs:enumeration value="E1b"/>
+                                    <xs:enumeration value="E21"/>
+                                    <xs:enumeration value="E3"/>
+                                    <xs:enumeration value="E93"/>
+                                    <xs:enumeration value="E94"/>
+                                    <xs:enumeration value="E9a"/>
+                                    <xs:enumeration value="E9b"/>
+                                    <xs:enumeration value="E9c"/>
+                                    <xs:enumeration value="E9d"/>
+                                    <xs:enumeration value="E9e"/>
+                                    <xs:enumeration value="El1"/>
+                                    <xs:enumeration value="Ela"/>
+                                    <xs:enumeration value="F01"/>
+                                    <xs:enumeration value="F51"/>
+                                    <xs:enumeration value="F56"/>
+                                    <xs:enumeration value="F5a"/>
+                                    <xs:enumeration value="H11"/>
+                                    <xs:enumeration value="H24"/>
+                                    <xs:enumeration value="H26"/>
+                                    <xs:enumeration value="L1 prime"/>
+                                    <xs:enumeration value="L10"/>
+                                    <xs:enumeration value="L10(M)"/>
+                                    <xs:enumeration value="L11"/>
+                                    <xs:enumeration value="L12 prime"/>
+                                    <xs:enumeration value="L1a"/>
+                                    <xs:enumeration value="L21"/>
+                                    <xs:enumeration value="L22"/>
+                                    <xs:enumeration value="L2a"/>
+                                    <xs:enumeration value="L2b prime"/>
+                                    <xs:enumeration value="L3 prime"/>
+                                    <xs:enumeration value="L60"/>
+                                    <xs:enumeration value="Ll2"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PhaseType">
+            <xs:sequence>
+                  <xs:element name="PhaseName" type="xs:string" minOccurs="0"/>
+                  <xs:element name="CrystalType" type="CrystalStructure" minOccurs="0"/>
+                  <xs:element name="PhaseFraction" type="PhaseFractiontType" minOccurs="0"/>
+                  <xs:element name="PhaseComposition" type="CompositionType" minOccurs="0">
+                        <xs:annotation>
+                              <xs:appinfo/>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="magneticState">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Non-magnetic"/>
+                                    <xs:enumeration value="Paramagnetic"/>
+                                    <xs:enumeration value="Ferromagnetic"/>
+                                    <xs:enumeration value="Antiferromagnetic"/>
+                                    <xs:enumeration value="Complex magnetism"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CompositionType">
+            <xs:annotation>
+                  <xs:appinfo/>
+            </xs:annotation>
+            <xs:sequence>
+                  <xs:element name="quantityUnit" type="ConstituentQuantityUnitType"/>
+                  <xs:element name="Constituents" type="ConstituentsType"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType xmlns:ns0="http://mdcs.ns" name="ConstituentsType"
+            ns0:_mod_mdcs_="/diffusion/periodic-table-multiple-short">
+            <xs:annotation>
+                  <xs:appinfo><module>module-chemical-composition-simple</module></xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="constituent"
+                        type="ConstituentMaterial">
+                        <xs:annotation>
+                              <xs:appinfo/>
+                        </xs:annotation>
+                  </xs:element>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ConstituentMaterial">
+            <xs:annotation>
+                  <xs:appinfo/>
+            </xs:annotation>
+            <xs:sequence>
+                  <xs:element name="element" type="ChemicalElement"/>
+                  <xs:element name="quantity" type="xs:double"/>
+                  <xs:element minOccurs="0" name="purity" type="xs:double"/>
+                  <xs:element minOccurs="0" name="error" type="xs:double"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="ChemicalElement">
+            <xs:annotation>
+                  <xs:appinfo/>
+            </xs:annotation>
+            <xs:restriction base="xs:string">
+                  <xs:enumeration value="Ac"/>
+                  <xs:enumeration value="Al"/>
+                  <xs:enumeration value="Ag"/>
+                  <xs:enumeration value="Am"/>
+                  <xs:enumeration value="Ar"/>
+                  <xs:enumeration value="As"/>
+                  <xs:enumeration value="At"/>
+                  <xs:enumeration value="Au"/>
+                  <xs:enumeration value="B"/>
+                  <xs:enumeration value="Ba"/>
+                  <xs:enumeration value="Bh"/>
+                  <xs:enumeration value="Bi"/>
+                  <xs:enumeration value="Be"/>
+                  <xs:enumeration value="Bk"/>
+                  <xs:enumeration value="Br"/>
+                  <xs:enumeration value="C"/>
+                  <xs:enumeration value="Ca"/>
+                  <xs:enumeration value="Cd"/>
+                  <xs:enumeration value="Ce"/>
+                  <xs:enumeration value="Cf"/>
+                  <xs:enumeration value="Cl"/>
+                  <xs:enumeration value="Cm"/>
+                  <xs:enumeration value="Co"/>
+                  <xs:enumeration value="Cr"/>
+                  <xs:enumeration value="Cs"/>
+                  <xs:enumeration value="Cu"/>
+                  <xs:enumeration value="Db"/>
+                  <xs:enumeration value="Dy"/>
+                  <xs:enumeration value="Er"/>
+                  <xs:enumeration value="Es"/>
+                  <xs:enumeration value="Eu"/>
+                  <xs:enumeration value="F"/>
+                  <xs:enumeration value="Fe"/>
+                  <xs:enumeration value="Fm"/>
+                  <xs:enumeration value="Fr"/>
+                  <xs:enumeration value="Ga"/>
+                  <xs:enumeration value="Gd"/>
+                  <xs:enumeration value="Ge"/>
+                  <xs:enumeration value="H"/>
+                  <xs:enumeration value="He"/>
+                  <xs:enumeration value="Hf"/>
+                  <xs:enumeration value="Hg"/>
+                  <xs:enumeration value="Ho"/>
+                  <xs:enumeration value="Hs"/>
+                  <xs:enumeration value="I"/>
+                  <xs:enumeration value="In"/>
+                  <xs:enumeration value="Ir"/>
+                  <xs:enumeration value="K"/>
+                  <xs:enumeration value="Kr"/>
+                  <xs:enumeration value="La"/>
+                  <xs:enumeration value="Li"/>
+                  <xs:enumeration value="Lr"/>
+                  <xs:enumeration value="Lu"/>
+                  <xs:enumeration value="Md"/>
+                  <xs:enumeration value="Mg"/>
+                  <xs:enumeration value="Mn"/>
+                  <xs:enumeration value="Mo"/>
+                  <xs:enumeration value="Mt"/>
+                  <xs:enumeration value="N"/>
+                  <xs:enumeration value="Na"/>
+                  <xs:enumeration value="Nb"/>
+                  <xs:enumeration value="Nd"/>
+                  <xs:enumeration value="Ne"/>
+                  <xs:enumeration value="Ni"/>
+                  <xs:enumeration value="No"/>
+                  <xs:enumeration value="Np"/>
+                  <xs:enumeration value="O"/>
+                  <xs:enumeration value="Os"/>
+                  <xs:enumeration value="P"/>
+                  <xs:enumeration value="Pa"/>
+                  <xs:enumeration value="Pb"/>
+                  <xs:enumeration value="Pd"/>
+                  <xs:enumeration value="Pm"/>
+                  <xs:enumeration value="Po"/>
+                  <xs:enumeration value="Pr"/>
+                  <xs:enumeration value="Pt"/>
+                  <xs:enumeration value="Pu"/>
+                  <xs:enumeration value="Ra"/>
+                  <xs:enumeration value="Rb"/>
+                  <xs:enumeration value="Re"/>
+                  <xs:enumeration value="Rf"/>
+                  <xs:enumeration value="Rh"/>
+                  <xs:enumeration value="Rn"/>
+                  <xs:enumeration value="Ru"/>
+                  <xs:enumeration value="S"/>
+                  <xs:enumeration value="Sb"/>
+                  <xs:enumeration value="Sc"/>
+                  <xs:enumeration value="Se"/>
+                  <xs:enumeration value="Sg"/>
+                  <xs:enumeration value="Si"/>
+                  <xs:enumeration value="Sm"/>
+                  <xs:enumeration value="Sn"/>
+                  <xs:enumeration value="Sr"/>
+                  <xs:enumeration value="Ta"/>
+                  <xs:enumeration value="Tb"/>
+                  <xs:enumeration value="Tc"/>
+                  <xs:enumeration value="Te"/>
+                  <xs:enumeration value="Th"/>
+                  <xs:enumeration value="Ti"/>
+                  <xs:enumeration value="Tl"/>
+                  <xs:enumeration value="Tm"/>
+                  <xs:enumeration value="U"/>
+                  <xs:enumeration value="V"/>
+                  <xs:enumeration value="W"/>
+                  <xs:enumeration value="Xe"/>
+                  <xs:enumeration value="Y"/>
+                  <xs:enumeration value="Yb"/>
+                  <xs:enumeration value="Zn"/>
+                  <xs:enumeration value="Zr"/>
+            </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ConstituentQuantityUnitType">
+            <xs:restriction base="xs:string">
+                  <xs:enumeration value="mass fraction"/>
+                  <xs:enumeration value="mass percent"/>
+                  <xs:enumeration value="mole fraction"/>
+                  <xs:enumeration value="mole percent"/>
+            </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="PhaseFractiontType">
+            <xs:all>
+                  <xs:element name="PhaseFractionValue" type="xs:double"/>
+                  <xs:element name="PhaseFractiontypes">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Mole Fraction"/>
+                                    <xs:enumeration value="Volume Fraction"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+            </xs:all>
+      </xs:complexType>
+      <xs:complexType name="FormOfMaterial">
+            <xs:choice>
+                  <xs:element minOccurs="0" name="singleCrystalline" type="SingleCrystallineType"/>
+                  <xs:element minOccurs="0" name="polycrystalline" type="PolyCrystallineType"/>
+                  <xs:element minOccurs="0" name="AmorphorousMaterial" type="Amorphorous"/>
+            </xs:choice>
+      </xs:complexType>
+      <xs:complexType name="PolyCrystallineType">
+            <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="averageGrainSize"
+                        type="xs:double"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="UnitLength"
+                        type="LengthUnitType"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Amorphorous"/>
+      <xs:complexType name="SingleCrystallineType"> </xs:complexType>
+      <xs:complexType name="PrimaryAlloyProcessingMethod">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                  <xs:element name="MeltProcessing" minOccurs="0">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Sand Casting"/>
+                                    <xs:enumeration value="Die Casting "/>
+                                    <xs:enumeration value="Investment Casting"/>
+                                    <xs:enumeration value="Slip Casting"/>
+                                    <xs:enumeration value="Centrifugal Casting"/>
+                                    <xs:enumeration value="Vacuum Arc Remelting (arc melting)"/>
+                                    <xs:enumeration value="Continuous Casting"/>
+                                    <xs:enumeration value="Levitation Melting"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Solidification" minOccurs="0">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Seeded Solidification"/>
+                                    <xs:enumeration value="Directional Solidification"/>
+                                    <xs:enumeration value="Zone Refining"/>
+                                    <xs:enumeration value="Single Crystal Solidification"/>
+                                    <xs:enumeration value="Rapid Solidification"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="PowderProcessing" minOccurs="0">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Atomization"/>
+                                    <xs:enumeration value="Ball Milling"/>
+                                    <xs:enumeration value="Sponge Iron Process"/>
+                                    <xs:enumeration value="Centrifugal Disintegration"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DepositionProcessing" minOccurs="0">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Physical Vapor Deposition"/>
+                                    <xs:enumeration value="Sputter Coating"/>
+                                    <xs:enumeration value="Chemical Vapor Deposition"/>
+                                    <xs:enumeration value="Electron Beam Deposition "/>
+                                    <xs:enumeration value="Ion Beam Deposition"/>
+                                    <xs:enumeration value="Plasma Spraying "/>
+                                    <xs:enumeration value="Electrodeposition "/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element maxOccurs="1" minOccurs="0" name="AdditiveManufacturing">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Direct Metal Laser Sintering (DMLS)"/>
+                                    <xs:enumeration value="Selective Laser Melting (SLM)"/>
+                                    <xs:enumeration value="Electron Beam Melting (EBM)"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element xmlns:ns0="http://mdcs.ns" name="OtherMethod"
+                        ns0:_mod_mdcs_="/registry/description" type="xs:string" minOccurs="0"/>
+            </xs:choice>
+      </xs:complexType>
+      <xs:complexType name="SecondaryAlloyProcessing">
+            <xs:choice>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="ThermalProcessing"
+                        type="ThermalConditions"/>
+                  <xs:element name="Forming">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Forging"/>
+                                    <xs:enumeration value="Cold Rolling"/>
+                                    <xs:enumeration value="Hot Rolling"/>
+                                    <xs:enumeration value="Extrusion "/>
+                                    <xs:enumeration value="Drawing"/>
+                                    <xs:enumeration value="Milling"/>
+                                    <xs:enumeration value="Stamping"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="PowderDensification">
+                        <xs:complexType>
+                              <xs:choice>
+                                    <xs:element name="Sintering" type="CompactionConditions"/>
+                                    <xs:element name="IsostaticPressing" type="CompactionConditions"
+                                    />
+                              </xs:choice>
+                        </xs:complexType>
+                  </xs:element>
+                  <xs:element xmlns:ns0="http://mdcs.ns" name="OtherProcessing"
+                        ns0:_mod_mdcs_="/registry/description" type="xs:string"/>
+            </xs:choice>
+      </xs:complexType>
+      <xs:complexType name="AlloyProcessingType">
+            <xs:sequence>
+                  <xs:element name="PrimaryProcessing" type="PrimaryAlloyProcessingMethod"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="SecondaryProcessing"
+                        type="SecondaryAlloyProcessing"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ThermalConditions">
+            <xs:all>
+                  <xs:element name="AnnealingType">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Annealing"/>
+                                    <xs:enumeration value="Homogenization"/>
+                                    <xs:enumeration value="Aging"/>
+                                    <xs:enumeration value="Recrystallization"/>
+                                    <xs:enumeration value="Tempering"/>
+                                    <xs:enumeration value="Normalizing"/>
+                                    <xs:enumeration value="Stress-Relief Annealing"/>
+                                    <xs:enumeration value="Other"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="ThermalProfile" type="Profile"/>
+                  <xs:element minOccurs="0" name="FixedConditions">
+                        <xs:complexType>
+                              <xs:sequence>
+                                    <xs:element name="TemperatureCondition" type="TemperatureType"/>
+                                    <xs:element name="TimeCondition" type="TimeType"/>
+                              </xs:sequence>
+                        </xs:complexType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="AtmosphereType" type="Atmosphere"/>
+                  <xs:element minOccurs="0" name="Quenching" type="quenchingType"/>
+                  <xs:element maxOccurs="1" minOccurs="0" name="ProcessingNote" type="xs:string">
+                        <xs:annotation>
+                              <xs:appinfo><module>module-text-area</module></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+            </xs:all>
+      </xs:complexType>
+      <xs:complexType name="Profile">
+            <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="1" name="table" type="Table"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType xmlns:ns0="http://mdcs.ns" name="Table"
+            ns0:_mod_mdcs_="/diffusion/upload-excel">
+            <xs:sequence>
+                  <xs:element name="headers" type="Headers"/>
+                  <xs:element name="rows" type="Rows"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="optional"/>
+      </xs:complexType>
+      <xs:complexType name="Headers">
+            <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="column" type="Column"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Rows">
+            <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="row" type="Row"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TemperatureType">
+            <xs:sequence>
+                  <xs:element name="temperature" type="xs:float"/>
+                  <xs:element name="unit" type="TemperatureUnitType"/>
+                  <xs:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TimeType">
+            <xs:sequence>
+                  <xs:element name="duration" type="xs:double"/>
+                  <xs:element name="unit" type="TimeUnitType"/>
+                  <xs:element minOccurs="0" name="uncertainty" type="Uncertainty"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Uncertainty">
+            <xs:sequence>
+                  <xs:element name="type">
+                        <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="amount"/>
+                                    <xs:enumeration value="fraction"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="value" type="xs:double"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="TemperatureUnitType">
+            <xs:restriction base="xs:string">
+                  <xs:enumeration value="Kelvin"/>
+                  <xs:enumeration value="Celsius"/>
+                  <xs:enumeration value="Fahrenheit"/>
+            </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="quenchingType">
+            <xs:restriction base="xs:string">
+                  <xs:enumeration value=""/>
+                  <xs:enumeration value="Ice Quenching"/>
+                  <xs:enumeration value="Water Quenching"/>
+                  <xs:enumeration value="Brine Quenching"/>
+                  <xs:enumeration value="Lqiuid Nitrogen Quenching"/>
+                  <xs:enumeration value="Air Cooling"/>
+                  <xs:enumeration value="Furnace Cooling"/>
+                  <xs:enumeration value="Gas Cooling"/>
+                  <xs:enumeration value="Oil Quenching"/>
+            </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Atmosphere">
+            <xs:restriction base="xs:string">
+                  <xs:enumeration value="air"/>
+                  <xs:enumeration value="argon"/>
+                  <xs:enumeration value="nitrogen"/>
+                  <xs:enumeration value="hellium"/>
+                  <xs:enumeration value="vacuum"/>
+                  <xs:enumeration value="Molten salt"/>
+                  <xs:enumeration value="water"/>
+                  <xs:enumeration value="oil"/>
+                  <xs:enumeration value=""/>
+            </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="TimeUnitType">
+            <xs:restriction base="xs:string">
+                  <xs:enumeration value="years"/>
+                  <xs:enumeration value="days"/>
+                  <xs:enumeration value="hours"/>
+                  <xs:enumeration value="minutes"/>
+                  <xs:enumeration value="seconds"/>
+                  <xs:enumeration value="milliseconds"/>
+                  <xs:enumeration value="microseconds"/>
+            </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="LengthUnitType">
+            <xs:restriction base="xs:string">
+                  <xs:enumeration value="millimeter"/>
+                  <xs:enumeration value="micrometer"/>
+                  <xs:enumeration value="picometer"/>
+                  <xs:enumeration value="meter"/>
+                  <xs:enumeration value="centimeter"/>
+            </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="CompactionConditions">
+            <xs:sequence>
+                  <xs:element name="TemperatureConditions" type="TemperatureType"/>
+                  <xs:element name="Duration" type="TimeType"/>
+                  <xs:element name="Pressure">
+                        <xs:complexType>
+                              <xs:sequence>
+                                    <xs:element name="PressureValue" type="xs:double"/>
+                                    <xs:element name="PressureUnit">
+                                          <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:enumeration value="Pa"/>
+                                                  <xs:enumeration value="GPa"/>
+                                                  <xs:enumeration value="bar"/>
+                                                  <xs:enumeration value="atm"/>
+                                                  <xs:enumeration value="psi"/>
+                                                </xs:restriction>
+                                          </xs:simpleType>
+                                    </xs:element>
+                              </xs:sequence>
+                        </xs:complexType>
+                  </xs:element>
+                  <xs:element name="Environment" type="Atmosphere"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Row">
+            <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="column" type="Column"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+      </xs:complexType>
+      <xs:complexType name="Column">
+            <xs:simpleContent>
+                  <xs:extension base="xs:string">
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                  </xs:extension>
+            </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="Person">
+            <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Name" type="xs:string"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Email" type="xs:string"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Location" type="xs:string"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Phone" type="xs:string"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Affliation" type="xs:string"
+                  />
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="thing">
+            <xs:sequence>
+                  <xs:element minOccurs="1" name="name" type="xs:string">
+                        <xs:annotation>
+                              <xs:appinfo><label>Name</label></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="altName" type="xs:string">
+                        <xs:annotation>
+                              <xs:appinfo><label>Alternate Name (e.g. acronym, nickname)</label></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="identifier"
+                        type="identifier">
+                        <xs:annotation>
+                              <xs:appinfo><label>Identifier</label></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DateCuration" type="xs:date"/>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="identifier">
+            <xs:sequence>
+                  <xs:element form="unqualified" name="id" type="xs:string">
+                        <xs:annotation>
+                              <xs:appinfo><label>Identifier Value</label><placeholder>E.g. http://dx.doi.org/123/abc;
+                            http://orcid.org/0000-0000-0000-0000</placeholder></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element form="unqualified" minOccurs="0" name="type" type="xs:string">
+                        <xs:annotation>
+                              <xs:appinfo><label>Identifier Type</label><placeholder>E.g. DOI, Handle, ORCID,IGSN</placeholder></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element name="relationType">
+                        <xs:simpleType>
+                              <xs:annotation>
+                                    <xs:documentation>Description of the relationship of the resource being registered (A) and the related resource (B).</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                    <xs:enumeration value="IsCitedBy"/>
+                                    <xs:enumeration value="Cites"/>
+                                    <xs:enumeration value="IsSupplementTo"/>
+                                    <xs:enumeration value="IsSupplementedBy"/>
+                                    <xs:enumeration value="IsContinuedBy"/>
+                                    <xs:enumeration value="Continues"/>
+                                    <xs:enumeration value="IsNewVersionOf"/>
+                                    <xs:enumeration value="IsPreviousVersionOf"/>
+                                    <xs:enumeration value="IsPartOf"/>
+                                    <xs:enumeration value="HasPart"/>
+                                    <xs:enumeration value="IsReferencedBy"/>
+                                    <xs:enumeration value="References"/>
+                                    <xs:enumeration value="IsDocumentedBy"/>
+                                    <xs:enumeration value="Documents"/>
+                                    <xs:enumeration value="IsCompiledBy"/>
+                                    <xs:enumeration value="Compiles"/>
+                                    <xs:enumeration value="IsVariantFormOf"/>
+                                    <xs:enumeration value="IsOriginalFormOf"/>
+                                    <xs:enumeration value="IsIdenticalTo"/>
+                                    <xs:enumeration value="HasMetadata"/>
+                                    <xs:enumeration value="IsMetadataFor"/>
+                                    <xs:enumeration value="Reviews"/>
+                                    <xs:enumeration value="IsReviewedBy"/>
+                                    <xs:enumeration value="IsDerivedFrom"/>
+                                    <xs:enumeration value="IsSourceOf"/>
+                              </xs:restriction>
+                        </xs:simpleType>
+                  </xs:element>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="note-type">
+            <xs:sequence>
+                  <xs:element minOccurs="0" name="title" type="xs:string"> </xs:element>
+                  <xs:element minOccurs="0" name="date" type="xs:date"/>
+                  <xs:element minOccurs="0" name="text" type="xs:string">
+                        <xs:annotation>
+                              <xs:appinfo><module>module-text-area</module></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+            </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="remote-file-type">
+            <xs:sequence>
+                  <xs:element minOccurs="0" name="name" type="xs:string"/>
+                  <xs:element minOccurs="0" name="description" type="xs:string"/>
+                  <xs:element minOccurs="0" name="type" type="xs:string"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="comment" type="xs:string"/>
+                  <xs:element xmlns:ns0="http://mdcs.ns" maxOccurs="unbounded" minOccurs="0"
+                        name="downloadURL" ns0:_mod_mdcs_="/curator/blob-hoster" type="xs:anyURI">
+                        <xs:annotation>
+                              <xs:documentation>URL providing direct access to a downloadable file of a dataset.</xs:documentation>
+                              <xs:appinfo><module>module-advanced-blob-host</module><label>Upload load a file that can then download using a direct URL</label></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="linkURL" type="xs:anyURI">
+                        <xs:annotation>
+                              <xs:appinfo><label>Provide URL link to a file</label></xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="local" type="xs:string">
+                        <xs:annotation>
+                              <xs:appinfo><placeholder>e.g. hard drive John’s desk</placeholder>
+                              </xs:appinfo>
+                        </xs:annotation>
+                  </xs:element>
+            </xs:sequence>
+      </xs:complexType>
+</xs:schema>
